@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         yourSunInfoTV = findViewById(R.id.sunString);
         getCurLocationBtn = findViewById(R.id.btnCurLocation);
         selectLocationBtn = findViewById(R.id.btnSelectLocation);
+
         getCurLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 getCurrentLocationData();
             }
         });
-
         selectLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,16 +79,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode == RESULT_OK) {
             Place place = PlacePicker.getPlace(this, data);
             String toastMsg = String.format("Place: %s", place.getName());
-
             LatLng latLng = place.getLatLng();
             double latitude = latLng.latitude;
             double longitude = latLng.longitude;
@@ -96,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             displaySunInformation(latitude, longitude);
             Toast.makeText(this, toastMsg + " lat: " + latitude + " long: " + longitude, Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void getCurrentLocationData() {
@@ -117,17 +113,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void displaySunInformation(double latitude, double longitude) {
         RequestQueue mRequestQueue;
-
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
-
         mRequestQueue = new RequestQueue(cache, network);
-
         mRequestQueue.start();
-
         String url = "https://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude;
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
