@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestTaskLvov</string>
+    <string name="mainTitle">HELLO THERE</string>
+    <string name="mainSubTitle">This app can show sun lifecycle of your city, or any specified location</string>
+    <string name="btnCurrentText">Your city</string>
+    <string name="btnLocationText">Location</string>
+</resources>
